@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TKDL Plants</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; }
+        th { background: #f4f4f4; }
+    </style>
+</head>
+<body>
+<h1>TKDL Plant Data</h1>
+<table id="plantTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Plant Name</th>
+        <th>Scientific Name</th>
+        <th>Medicinal Use</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+        fetch('/plants')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector("#plantTable tbody");
+                data.forEach(plant => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${plant.id}</td>
+                        <td>${plant.name}</td>
+                        <td>${plant.usage}</td>
+                        <td>${plant.description}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(err => console.error('Error fetching data:', err));
+    </script>
+</body>
+</html>
