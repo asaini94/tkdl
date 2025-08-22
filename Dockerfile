@@ -9,10 +9,11 @@ ENV SPRING_PROFILES_ACTIVE=prod \
 WORKDIR /app
 
 # 4. Copy the built JAR file into the container
-COPY target/tkdl-0.0.1-SNAPSHOT.jar app.jar
+COPY target/*.jar app.jar
 
 # 5. Expose application port
 EXPOSE 8080
 
 # 6. Run the Spring Boot application
 ENTRYPOINT ["java","-jar","app.jar"]
+
